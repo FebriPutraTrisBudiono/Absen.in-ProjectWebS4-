@@ -68,8 +68,6 @@ class Jabatans extends Component
         $jabatan->delete();
         session()->flash('message', $jabatan->jabatan . ' Berhasil Dihapus ');
     }
-
-
     
     public function edit($id)
     {

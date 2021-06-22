@@ -12,13 +12,13 @@
                     <div class="">
                         <div class="mb-4">
                             <label for="forstart" class="block text-gray-700 text-sm font-bold mb-2">Start</label>
-                            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="forstart" name="start" wire:model="start">
+                            <input type="time" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="forstart" name="start" wire:model="start">
                             @error('start') <span class="text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-4">
                             <label for="forfinish" class="block text-gray-700 text-sm font-bold mb-2">Finish</label>
-                            <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="forfinish" name="finish" wire:model="finish">
+                            <input type="time" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="forfinish" name="finish" wire:model="finish">
                             @error('finish') <span class="text-red-500">{{ $message }}</span>
                             @enderror
                         </div>

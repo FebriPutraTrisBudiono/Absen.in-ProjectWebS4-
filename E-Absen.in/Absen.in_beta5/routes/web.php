@@ -6,6 +6,8 @@ use App\Http\Livewire\Members;
 use App\Http\Livewire\Jabatans;
 use App\Http\Livewire\Pengaturanlainnya;
 use App\Http\Livewire\MembersKaryawan;
+use App\Http\Livewire\Absens;
+use App\Http\Livewire\Absenku;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/dashboard', function() {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('absen', Absens::class)->name('absen');
+
+    Route::get('absenku', Absenku::class)->name('absenku');
 
     Route::get('pengaturanlainnya', Pengaturanlainnya::class)->name('pengaturanlainnya');
 });
