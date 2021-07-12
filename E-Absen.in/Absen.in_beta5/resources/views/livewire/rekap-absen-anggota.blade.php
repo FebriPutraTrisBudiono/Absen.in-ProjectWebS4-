@@ -1,5 +1,5 @@
 <x-slot name="header">
-    <h2 class="font-semibold text-xl text-grey-800 leading-tight">Absenku</h2>
+    <h2 class="font-semibold text-xl text-grey-800 leading-tight">Rekap Absen Anggota</h2>
 </x-slot>
 
 <div class="py-5">
@@ -13,6 +13,19 @@
             </div>
 
             @endif
+
+            <div class="row mb-3 p-2">
+                <div class="col-md-3">
+                    <label for="">Continent</label>
+                    <select wire:model="byContinent" class="form-control">
+                        <option value="">No Selected</option>
+                        @foreach ($members as $member)
+                        <option value="{{ $member->id }}">{{ $member->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
             <table class="border-collapse w-full">
                 <thead>
                     <tr>
@@ -26,11 +39,10 @@
                 </thead>
                 <tbody>
                     @forelse($absen as $row)
-                    @if ($row->id == Auth::user()->id)
                     <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
                         <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Tanggal</span>
-                            {{ $row->tgl }}
+                            {{ $row->tgl}}
                         </td>
                         <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Waktu</span>
@@ -49,7 +61,6 @@
                             {{ $row->longlat }}
                         </td>
                     </tr>
-                    @endif
                     @empty
                     <tr>
                         <td class="border px-4 py-2 text-center" colspan="6">Tidak ada data</td>

@@ -16,7 +16,7 @@ class Hak_Akses
      */
     public function handle(Request $request, Closure $next, ...$hak_akses)
     {
-        if(in_array($request->user()->hak_akses, $hak_akses)){
+        if (in_array($request->user()->hak_akses, $hak_akses)) {
             return $next($request);
         }
         return redirect('/dashboard');

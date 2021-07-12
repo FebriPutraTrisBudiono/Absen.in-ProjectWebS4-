@@ -14,13 +14,13 @@ class Members extends Component
 
     public function render()
     {
-        $this->members = member::orderBy('created_at', 'ASC')->get(); 
-        $this->jabatans = jabatan::orderBy('jabatan','ASC')->get();
-        return view('hak_akses.admin.members'); 
+        $this->members = member::orderBy('created_at', 'ASC')->get();
+        $this->jabatans = jabatan::orderBy('jabatan', 'ASC')->get();
+        return view('hak_akses.admin.members');
     }
     public function create()
     {
-        
+
         $this->resetFields();
         $this->openModal();
     }
@@ -35,7 +35,7 @@ class Members extends Component
         $this->isModal = true;
     }
 
-    
+
     public function resetFields()
     {
         $this->name = '';
@@ -50,7 +50,7 @@ class Members extends Component
 
     public function store()
     {
-        
+
         $this->validate([
             'name' => 'required',
             'ttd' => 'required|string',
@@ -62,7 +62,7 @@ class Members extends Component
             'alamat' => 'required|string',
         ]);
 
-        if($this->member_id==null){
+        if ($this->member_id == null) {
             //Anggota::insert(array('Nama_Anggota'=>$this->Nama_Anggota,'Jabatan'=>$this->Jabatan,'TTD'=>$this->TTD,'Alamat'=>$this->Alamat));
             member::create([
                 'name' => $this->name,
@@ -74,36 +74,37 @@ class Members extends Component
                 'password' => Hash::make($this->password),
                 'alamat' => $this->alamat,
             ]);
-        }else{
-            member::where('id',$this->member_id)->update(array(
-                'name'=>$this->name,
-                'ttd'=>$this->ttd,
-                'jabatan'=>$this->jabatan,
-                'hak_akses'=>$this->hak_akses,
-                'no_telepon'=>$this->no_telepon,
-                'email'=>$this->email,
-                'alamat'=>$this->alamat));
+        } else {
+            member::where('id', $this->member_id)->update(array(
+                'name' => $this->name,
+                'ttd' => $this->ttd,
+                'jabatan' => $this->jabatan,
+                'hak_akses' => $this->hak_akses,
+                'no_telepon' => $this->no_telepon,
+                'email' => $this->email,
+                'alamat' => $this->alamat
+            ));
         }
-        
-        session()->flash('message', $this->member_id!=null ? $this->name . ' Berhasil Diperbaharui': $this->name . ' Berhasil Ditambahkan');
-        $this->closeModal(); 
-        $this->resetFields(); 
+
+        session()->flash('message', $this->member_id != null ? $this->name . ' Berhasil Diperbaharui' : $this->name . ' Berhasil Ditambahkan');
+        $this->closeModal();
+        $this->resetFields();
     }
 
-    
+
     public function delete($id)
     {
-        $jabatan = member ::find($id); 
+        $jabatan = member::find($id);
         $jabatan->delete();
         session()->flash('message', $jabatan->name . ' Berhasil Dihapus ');
     }
 
 
-    
+
     public function edit($id)
     {
-        
-        $jabatan = member ::find($id); 
+
+        $jabatan = member::find($id);
         $this->member_id = $id;
         $this->name = $jabatan->name;
         $this->ttd = $jabatan->ttd;
@@ -113,6 +114,6 @@ class Members extends Component
         $this->email = $jabatan->email;
         $this->password = $jabatan->password;
         $this->alamat = $jabatan->alamat;
-           $this->openModal(); 
+        $this->openModal();
     }
 }
