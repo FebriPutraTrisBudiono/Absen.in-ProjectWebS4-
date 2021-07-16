@@ -1,5 +1,5 @@
 <center style="margin-top: 10px;">
-  <img src="http://3.bp.blogspot.com/-NJqKgR-fWzQ/TzJj92cyZzI/AAAAAAAAE30/KRa-VJZBb0c/s1600/LOGO+MAHKAMAH+AGUNG.png" width="100px" alt="">
+  <img src="{{ asset('css/e-absenin copy.png') }}" width="150px" alt="">
 </center>
 <form action="#" method="post">
   {{ csrf_field() }}
