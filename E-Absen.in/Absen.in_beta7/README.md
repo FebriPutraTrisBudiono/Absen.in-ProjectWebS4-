@@ -22,7 +22,3 @@ E-Absen.in adalah Aplikasi Absensi dan manajemen data petugas yang berbasis Onli
 - **Febri Putra Tris Budiono**
 - **Bagus Bachtiar Rizki**
 - **Dimas Cahya Ramadhan**
-
-## Keterangan Pembagian
-=======
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
