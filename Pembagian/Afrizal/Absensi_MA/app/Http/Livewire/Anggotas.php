@@ -49,6 +49,7 @@ class Anggotas extends Component
         
         $this->validate([
             'Nama_Anggota' => 'required',
+            'Jabatan' => 'required|string',
             'TTD' => 'required|string',
             'Alamat' => 'required|string',
             
