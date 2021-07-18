@@ -86,7 +86,7 @@
       Rekap Absen Anggota
     </a>
     @endif
-    @if (auth()->user()->hak_akses == "Karyawan")
+    @if (auth()->user()->hak_akses == "Admin")
     <a href="{{ route('jamkerja') }}" role="menuitem" class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary">
       Jam Kerja
     </a>
