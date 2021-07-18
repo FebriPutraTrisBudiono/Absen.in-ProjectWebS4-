@@ -86,7 +86,7 @@ class Members extends Component
             ));
         }
 
-        session()->flash('message', $this->member_id != null ? $this->name . ' Berhasil Diperbaharui' : $this->name . ' Berhasil Ditambahkan');
+        session()->flash('message', $this->member_id != null ? $this->name . ' Berhasil Diperbarui' : $this->name . ' Berhasil Ditambahkan');
         $this->closeModal();
         $this->resetFields();
     }
