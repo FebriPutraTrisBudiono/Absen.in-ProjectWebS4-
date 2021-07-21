@@ -56,7 +56,7 @@ class Jabatans extends Component
             jabatan::where('id', $this->member_id)->update(array('jabatan' => $this->jabatan));
         }
 
-        session()->flash('message', $this->member_id != null ? $this->jabatan . ' Berhasil Diperbarui' : $this->jabatan . ' Berhasil Ditambahkan');
+        session()->flash('message', $this->member_id != null ? $this->jabatan . ' Berhasil Diperbaharui' : $this->jabatan . ' Berhasil Ditambahkan');
         $this->closeModal();
         $this->resetFields();
     }

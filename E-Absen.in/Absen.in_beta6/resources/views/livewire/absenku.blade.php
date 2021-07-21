@@ -26,7 +26,7 @@
                 </thead>
                 <tbody>
                     @forelse($absen as $row)
-                    @if ($row->id == Auth::user()->id)
+                    @if ($row->id_user == Auth::user()->id)
                     <tr class="bg-white lg:hover:bg-gray-100 lg:hover:text-black flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0 dark:bg-darker">
                         <td class="w-full lg:w-auto p-3 text-center border border-b text-center block lg:table-cell relative lg:static dark:text-white-500">
                             {{ $row->tgl }}
@@ -38,7 +38,7 @@
                             {{ $row->keterangan }}
                         </td>
                         <td class="w-full lg:w-auto p-3 text-center border border-b text-center block lg:table-cell relative lg:static dark:text-white-500">
-                            {{ $row->id }}
+                            {{ $row->id_user }}
                         </td>
                         <td class="w-full lg:w-auto p-3 text-center border border-b text-center block lg:table-cell relative lg:static dark:text-white-500">
                             {{ $row->longlat }}

@@ -12,7 +12,7 @@ class Absenku extends Component
     public function render()
     {
         return view('livewire.absenku', [
-            $this->absen = Absen::orderBy('id_absen', 'DESC')->get(),
+            $this->absen = Absen::orderBy('id', 'DESC')->get(),
         ]);
     }
 }

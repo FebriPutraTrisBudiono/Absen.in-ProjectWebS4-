@@ -26,6 +26,11 @@
                 </div>
             </div>
 
+            @if($isModal)
+            @include('livewire.create_rekap-absen-anggota')
+            @endif
+
+
             <table class="border-collapse w-full">
                 <thead>
                     <tr>
@@ -48,9 +53,10 @@
                         </td>
                         <td class="w-full lg:w-auto p-3 text-center border border-b text-center block lg:table-cell relative lg:static dark:text-white-500">
                             {{ $row->keterangan }}
+                            <button wire:click="edit({{ $row->id }})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</button>
                         </td>
                         <td class="w-full lg:w-auto p-3 text-center border border-b text-center block lg:table-cell relative lg:static dark:text-white-500">
-                            {{ $row->id }}
+                            {{ $row->id_user }}
                         </td>
                         <td class="w-full lg:w-auto p-3 text-center border border-b text-center block lg:table-cell relative lg:static dark:text-white-500">
                             {{ $row->longlat }}

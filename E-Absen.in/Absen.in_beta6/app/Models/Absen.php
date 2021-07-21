@@ -9,11 +9,11 @@ class Absen extends Model
 {
     use HasFactory;
     protected $table = 'absensi';
-    protected $fillable = ['tgl', 'waktu', 'keterangan', 'id', 'longlat'];
+    protected $fillable = ['tgl', 'waktu', 'keterangan', 'id_user', 'longlat'];
 
     public function member()
     {
-        return $this->belongsTo(Member::class, 'id', 'id_absen');
+        return $this->belongsTo(Member::class, 'id_user', 'id');
     }
 
     public function scopeSearch($query, $term)

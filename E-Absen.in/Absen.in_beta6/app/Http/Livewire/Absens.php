@@ -38,7 +38,7 @@ class Absens extends Component
             'tgl' => $this->tgl,
             'waktu' => $this->waktu,
             'keterangan' => $this->keteranganMasuk,
-            'id' => $this->id_user,
+            'id_user' => $this->id_user,
             'longlat' => $this->longlat,
 
         ]);

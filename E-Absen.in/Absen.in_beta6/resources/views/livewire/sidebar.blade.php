@@ -119,8 +119,7 @@
     </div>
 
     <!-- Layouts links -->
-    <div x-data="{ isActive: false, open: false}">
-      <!-- active & hover classes 'bg-primary-100 dark:bg-primary' -->
+    <!-- <div x-data="{ isActive: false, open: false}">
       <x-jet-nav-link href="{{ route('pengaturanlainnya') }}" :active="request()->routeIs('pengaturanlainnya')" class="flex items-center p-2 text-gray-500 transition-colors rounded-md dark:text-light hover:bg-primary-100 dark:hover:bg-primary">
         <span aria-hidden="true">
           <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -129,6 +128,6 @@
         </span>
         <span class="ml-2 text-sm"> {{ __('Pengaturan Lainnya') }} </span>
       </x-jet-nav-link>
-    </div>
+    </div> -->
   </nav>
 </div>

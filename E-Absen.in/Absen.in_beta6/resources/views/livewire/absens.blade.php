@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
+                    <td class="w-full lg:w-auto p-3 text-grey-800 text-center border border-b block lg:table-cell relative lg:static">
                         {{ $tgl }}
                         <input type="hidden" class="" id="fortgl" name="tgl" wire:model="tgl" value="{{ $tgl }}">
                         <input type="hidden" class="" id="forwaktu" name="waktu" wire:model="waktu" value="{{ $waktu }}">
