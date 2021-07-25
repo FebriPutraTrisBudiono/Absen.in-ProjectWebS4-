@@ -23,8 +23,8 @@ E-Absen.in adalah Aplikasi Absensi dan manajemen data petugas yang berbasis Onli
 - **Bagus Bachtiar Rizki**
 - **Dimas Cahya Ramadhan**
 
-## Directory Pembagian
+## ->Directory Pembagian
 Berfungsi untuk tempat upload anggota, berisi file fitur yang dikerjakan oleh masing-masing anggota yang diberi amanat
 
-## Directory E-Absen.in
+## -> Directory E-Absen.in
 Merupakan Directory yang berfungsi sebagai wadah untuk final project (Website) yang dikerjakan oleh ketua, berisi fitur-fitur yang dikerjakan oleh ketua dan anggota yang dijadikan satu pada folder ini
