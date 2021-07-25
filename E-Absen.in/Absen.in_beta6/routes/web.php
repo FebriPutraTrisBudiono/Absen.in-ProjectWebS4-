@@ -10,7 +10,7 @@ use App\Http\Livewire\Absens;
 use App\Http\Livewire\Absenku;
 use App\Http\Livewire\RekapAbsenAnggota;
 use App\Http\Livewire\Dashboard;
-use Carbon\Carbon;
+use App\Http\Livewire\ExportPDFAbsenku;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +23,7 @@ use Carbon\Carbon;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', [Dashboard::class, 'index']);
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('dashboard', function () {
@@ -41,6 +39,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('rekapabsenanggota', RekapAbsenAnggota::class)->name('rekapabsenanggota');
 
     Route::get('pengaturanlainnya', Pengaturanlainnya::class)->name('pengaturanlainnya');
+
+    // Route::get('ExportPDFAbsenku', ExportPDFAbsenku::class)->name('ExportPDFAbsenku');
 });
 
 Route::group(['middleware' => ['auth:sanctum' => 'hak_akses:Admin']], function () {

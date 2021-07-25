@@ -19,4 +19,9 @@ class Dashboard extends Component
 
         return view('livewire.dashboard');
     }
+
+    public function index()
+    {
+        return view('auth.login');
+    }
 }

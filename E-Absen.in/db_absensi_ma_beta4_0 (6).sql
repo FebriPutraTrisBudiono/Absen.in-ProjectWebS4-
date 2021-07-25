@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2021 at 10:19 AM
+-- Generation Time: Jul 22, 2021 at 03:39 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `absensi` (
-  `id_absen` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `tgl` date NOT NULL,
   `waktu` time DEFAULT NULL,
-  `keterangan` enum('Masuk','Pulang') DEFAULT NULL,
-  `id` int(20) NOT NULL,
+  `keterangan` varchar(15) DEFAULT NULL,
+  `id_user` int(20) NOT NULL,
   `longlat` varchar(1024) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
@@ -42,17 +42,18 @@ CREATE TABLE `absensi` (
 -- Dumping data for table `absensi`
 --
 
-INSERT INTO `absensi` (`id_absen`, `tgl`, `waktu`, `keterangan`, `id`, `longlat`, `created_at`, `updated_at`) VALUES
-(256, '2021-07-16', '22:47:03', 'Masuk', 1, NULL, '2021-07-16 16:00:44', NULL),
-(257, '2021-07-16', '22:58:40', 'Masuk', 1, NULL, '2021-07-16 16:00:44', NULL),
-(258, '2021-07-16', '23:01:24', 'Masuk', 1, NULL, '2021-07-16 09:01:26', '2021-07-16 09:01:26'),
-(259, '2021-07-16', '23:31:42', 'Masuk', 0, '37.421998333333335, -122.08400000000002', '2021-07-16 16:31:42', '2021-07-16 16:31:42'),
-(260, '2021-07-17', '18:44:42', 'Masuk', 1, '37.421998333333335, -122.08400000000002', '2021-07-17 11:44:42', '2021-07-17 11:44:42'),
-(261, '2021-07-17', '23:28:13', 'Masuk', 1, '37.421998333333335, -122.08400000000002', '2021-07-17 16:28:13', '2021-07-17 16:28:13'),
-(262, '2021-07-18', '15:11:38', 'Masuk', 1, '', '2021-07-18 08:11:38', '2021-07-18 08:11:38'),
-(263, '2021-07-18', '15:11:46', 'Masuk', 1, '', '2021-07-18 08:11:46', '2021-07-18 08:11:46'),
-(264, '2021-07-18', '15:12:22', 'Masuk', 1, '37.421998333333335, -122.08400000000002', '2021-07-18 08:12:22', '2021-07-18 08:12:22'),
-(265, '2021-07-18', '15:17:12', 'Masuk', 1, '', '2021-07-18 08:17:12', '2021-07-18 08:17:12');
+INSERT INTO `absensi` (`id`, `tgl`, `waktu`, `keterangan`, `id_user`, `longlat`, `created_at`, `updated_at`) VALUES
+(270, '2021-07-20', '21:28:58', 'Ijin', 1, NULL, '2021-07-20 07:29:02', '2021-07-20 20:00:53'),
+(271, '2021-07-20', '21:30:38', 'Masuk', 1, NULL, '2021-07-20 07:30:40', '2021-07-20 07:30:40'),
+(272, '2021-07-20', '23:32:31', 'Masuk', 1, NULL, '2021-07-20 09:32:33', '2021-07-20 09:32:33'),
+(273, '2021-07-20', '23:32:54', 'Ijin', 6, NULL, '2021-07-20 09:32:55', '2021-07-20 10:30:49'),
+(280, '2021-07-21', '11:04:20', 'Masuk', 1, '37.421998333333335, -122.08400000000002', '2021-07-21 04:04:20', '2021-07-21 04:04:20'),
+(281, '2021-07-21', '11:32:13', 'Masuk', 0, '37.421998333333335, -122.08400000000002', '2021-07-21 04:32:13', '2021-07-21 04:32:13'),
+(282, '2021-07-21', '11:42:53', 'Masuk', 1, '37.421998333333335, -122.08400000000002', '2021-07-21 04:42:53', '2021-07-21 04:42:53'),
+(283, '2021-07-21', '12:18:53', 'Sakit', 1, '37.421998333333335, -122.08400000000002', '2021-07-21 05:18:53', '2021-07-20 23:08:41'),
+(284, '2021-07-21', '19:08:00', 'Masuk', 1, NULL, '2021-07-21 05:08:13', '2021-07-21 05:08:13'),
+(285, '2021-07-21', '19:12:35', 'Masuk', 6, NULL, '2021-07-21 05:12:40', '2021-07-21 05:12:40'),
+(286, '2021-07-21', '19:15:03', 'Masuk', 1, '37.421998333333335, -122.08400000000002', '2021-07-21 12:15:03', '2021-07-21 12:15:03');
 
 -- --------------------------------------------------------
 
@@ -101,12 +102,8 @@ CREATE TABLE `jabatans` (
 INSERT INTO `jabatans` (`id`, `jabatan`, `created_at`, `updated_at`) VALUES
 (2, 'Karyawan', NULL, NULL),
 (3, 'Admin', NULL, NULL),
-(5, 'Hakim2', NULL, '2021-06-10 01:14:38'),
-(7, 'Hakim3', NULL, NULL),
-(8, 'Hakim4', NULL, NULL),
-(9, 'Hakim5', NULL, NULL),
-(10, 'Hakim6', NULL, NULL),
-(11, 'administrator', NULL, NULL);
+(11, 'administrator', NULL, NULL),
+(12, 'Hakim', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -127,19 +124,7 @@ CREATE TABLE `jamkerja` (
 --
 
 INSERT INTO `jamkerja` (`id`, `start`, `finish`, `keterangan`, `updated_at`) VALUES
-(1, '01:00:00', '23:39:00', 'Masuk', '2021-07-16 08:47:01');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `jam_kerjas`
---
-
-CREATE TABLE `jam_kerjas` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(1, '01:00:00', '21:39:00', 'Masuk', '2021-07-21 05:07:57');
 
 -- --------------------------------------------------------
 
@@ -226,10 +211,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('fzFpJJiJG5yRy7ZMPq3uhPrd8EpNFcGP0GezqviF', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoibEN2Y1REa25EUnhHWTBMTG9idGpVVVVJYWVJeThhWjJCOEtxS2pnRSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkOTN5WmNibjV5bnZUNTV1dnB3S2pnZUpEZ0tzWDZ0MEliQ0lObmtkSHVPbVVKMHpzL2lEOWkiO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJDkzeVpjYm41eW52VDU1dXZwd0tqZ2VKRGdLc1g2dDBJYkNJTm5rZEh1T21VSjB6cy9pRDlpIjt9', 1626448342),
-('ghhC8I3Sj7iZa80gHgZWrkEfLmWNpbt3eyx5K9rT', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoidFVRSERpc2kzT3hNMTFsSE15MUJDeDZQdmZHTDRzT0c4emd1Z09zUiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkNWhUVkN3cGtoRC5ZSzVIdVRORHpuZXJpdVlRUWVaWnRLalRtQWdiWlRvQVptdHo1STdEeEciO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJDVoVFZDd3BraEQuWUs1SHVUTkR6bmVyaXVZUVFlWlp0S2pUbUFnYlpUb0FabXR6NUk3RHhHIjt9', 1626583697),
-('mvOmwhZPPtTN7ZMPVEAFEyFpw0aS7e8HghY0j1SS', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicTRzQmk0MWo1QTZMd2xYTlREUkU0YWZYNERubzFvVG03THA0UmJpeSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9mb3Jnb3QtcGFzc3dvcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1626583663),
-('yBSNXV64vd23fYhS4gzwPkFqx9WdaxAptlxPOibd', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiUVh5bW8xbTJQWnJPTVJpbTRUdG1iZ0pXMkU1UHV0YU13STF3Q2ZqaiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hYnNlbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjE6e2k6MDtzOjc6Im1lc3NhZ2UiO31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCQ5M3laY2JuNXludlQ1NXV2cHdLamdlSkRnS3NYNnQwSWJDSU5ua2RIdU9tVUowenMvaUQ5aSI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkOTN5WmNibjV5bnZUNTV1dnB3S2pnZUpEZ0tzWDZ0MEliQ0lObmtkSHVPbVVKMHpzL2lEOWkiO30=', 1626451286);
+('WkXXVKg0feRfmzpVDdJmL50YKDQqFBMSYubQZ5VI', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiQWtOSU93Z1BjYVJrQ0tnOXJjaGM5d0IwRFlRdWJVaXZBNkI3U29xRyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyL3Byb2ZpbGUiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkUjVQMFpkN2dwOFhQT2JYcTBBbkpMLi9RenN6SnJjd3NXVTJGbzg3LnliUjk3T0VJVHdqR0ciO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJFI1UDBaZDdncDhYUE9iWHEwQW5KTC4vUXpzekpyY3dzV1UyRm84Ny55YlI5N09FSVR3akdHIjt9', 1626936069),
+('y5TO39lawDUCeOXkI4GFP0rLf9VVZ8CIPstLiu4x', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiUnZzeDUwNlRpNWd0a0dybTBHQkdRUlAzUlpoNXZmRXBHOUo4dVJyNCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkUjVQMFpkN2dwOFhQT2JYcTBBbkpMLi9RenN6SnJjd3NXVTJGbzg3LnliUjk3T0VJVHdqR0ciO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJFI1UDBaZDdncDhYUE9iWHEwQW5KTC4vUXpzekpyY3dzV1UyRm84Ny55YlI5N09FSVR3akdHIjt9', 1626961139);
 
 -- --------------------------------------------------------
 
@@ -240,7 +223,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ttd` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ttd` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jabatan` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
   `hak_akses` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `no_telepon` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -258,9 +241,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `ttd`, `jabatan`, `hak_akses`, `no_telepon`, `email`, `password`, `alamat`, `profile_photo_path`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'FebriPutraTris', '', 'Admin', 'Admin', '0821', 'febript@gmail.com', '$2y$10$5hTVCwpkhD.YK5HuTNDzneriuYQQeZZtKjTmAgbZToAZmtz5I7DxG', 'Jember', 'profile-photos/U3LJZLHcbDWsXA56Pwk5ZsuSS7UPQEA3s2xQ1SQ3.jpg', 'kwgdyOhafx155JTBbQdgDuOOtfrlVSDsd3h0qsAXCw5wNxshzkLRFmvGDlPL', '2021-05-24 08:54:05', '2021-07-17 21:48:08'),
-(6, 'afrizal', 'jember', 'Karyawan', 'Karyawan', '213123', 'febriarc@gmail.com', '$2y$10$dnpFSBYtpleWDbbxybvevuOh5IKtd6VkG6R9Rly2mXYIgVc0XMhx.', 'Jember', NULL, '1vX3Q7K9RC0GdkkGfPpbW3u57T8Nx3N9RcPXNV51m17DNm7jlZFMnAU6nJOg', '2021-06-09 21:30:13', '2021-06-13 02:38:38'),
-(14, 'Fahrel', 'Jember', 'Karyawan', 'Karyawan', '123123213', 'naomi@gmail.com', '$2y$10$8Mhp2A.H23sQaDQbmmDKqe8XtELtIPXbHfpQiAhU9Nzy/LzjAkaVS', 'Jember', NULL, NULL, '2021-06-21 05:02:31', '2021-06-21 05:02:31');
+(1, 'FebriPutra', 'Jember', 'Admin', 'Admin', '0821', 'febript@gmail.com', '$2y$10$R5P0Zd7gp8XPObXq0AnJL./QzszJrcwsWU2Fo87.ybR97OEITwjGG', 'Jember', 'profile-photos/Cyxb8tHJu0pXo1lUhyKDq9xChVWlW0EODqq0mWq2.png', '81T2uMRt8V82naALdz2oD4ACKi5Kmi7sZlOHffwXAbW4RS9sQJs6obF5e5si', '2021-05-24 08:54:05', '2021-07-21 23:41:09'),
+(6, 'afrizal', 'jember', 'Karyawan', 'Karyawan', '213123', 'febriarc@gmail.com', '$2y$10$dnpFSBYtpleWDbbxybvevuOh5IKtd6VkG6R9Rly2mXYIgVc0XMhx.', 'Jember', NULL, 'Ta9E7GIW8f6vCg8Dt8i4aZoCz69GttyOG0QvLfsSwXzXpXGcjjV4YiDtYv1P', '2021-06-09 21:30:13', '2021-07-20 07:53:26'),
+(14, 'Fahrel', 'Jember', 'Karyawan', 'Karyawan', '123123213', 'naomi@gmail.com', '$2y$10$8Mhp2A.H23sQaDQbmmDKqe8XtELtIPXbHfpQiAhU9Nzy/LzjAkaVS', 'Jember', NULL, NULL, '2021-06-21 05:02:31', '2021-07-21 05:07:17');
 
 --
 -- Indexes for dumped tables
@@ -270,7 +253,7 @@ INSERT INTO `users` (`id`, `name`, `ttd`, `jabatan`, `hak_akses`, `no_telepon`, 
 -- Indexes for table `absensi`
 --
 ALTER TABLE `absensi`
-  ADD PRIMARY KEY (`id_absen`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -295,12 +278,6 @@ ALTER TABLE `jabatans`
 -- Indexes for table `jamkerja`
 --
 ALTER TABLE `jamkerja`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `jam_kerjas`
---
-ALTER TABLE `jam_kerjas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -346,7 +323,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `absensi`
 --
 ALTER TABLE `absensi`
-  MODIFY `id_absen` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=266;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=287;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -364,19 +341,13 @@ ALTER TABLE `informasi_lainnya`
 -- AUTO_INCREMENT for table `jabatans`
 --
 ALTER TABLE `jabatans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `jamkerja`
 --
 ALTER TABLE `jamkerja`
   MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `jam_kerjas`
---
-ALTER TABLE `jam_kerjas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -394,7 +365,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
